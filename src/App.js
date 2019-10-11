@@ -1,17 +1,26 @@
 import React from 'react';
 import './App.css'
-
+import ZoltarWisdom from './ZoltarWisdom'
+import AboutUs from './AboutUs'
 class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      answer: null
+      answer: null,
+      possibleAnswers: [
+        "Of Course!  Zoltar is confident.",
+        "Hahhh, you'd have to have my power to do that.",
+        "I am in awe."
+      ],
+      name: 'Matt',
+      favoriteLearnClassOfAllTime: '2019 - E'
     }
   }
 
   getAnswer = () => {
-    //This is where you will write your Magic 8 Ball code
-    return "The Magic 8 ball answer"
+    const { possibleAnswers } = this.state 
+    const randomIndex = Math.floor(Math.random() * possibleAnswers.length)
+    return possibleAnswers[randomIndex]
   }
 
   handleSubmit = () =>{
@@ -22,7 +31,11 @@ class App extends React.Component {
   render(){
     return (
       <div>
-        <h1>Magic 8 Ball</h1>
+        <h1>Zoltar the Fortune Teller</h1>
+        <AboutUs 
+          name={this.state.name}
+          favoriteLearnClass= {this.state.favoriteLearnClassOfAllTime}
+        />
         <input
           type='text'
         />
@@ -30,11 +43,12 @@ class App extends React.Component {
         <button
           onClick={this.handleSubmit}
         >
-          Ask the Magic 8 Ball
+          Ask Zoltar
         </button>
-
         {this.state.answer &&
-          <h2> The Magic 8 Ball says: {this.state.answer} </h2>
+          <ZoltarWisdom 
+            response={this.state.answer} 
+          />
         }
       </div>
     )
